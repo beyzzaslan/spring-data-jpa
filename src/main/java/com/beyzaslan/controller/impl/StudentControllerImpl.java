@@ -16,7 +16,7 @@ public class StudentControllerImpl implements IStudentController {
 
     @PostMapping(path = "/save")
     @Override
-    public Student saveStudent( @RequestBody Student student) {
+    public Student saveStudent(@RequestBody Student student) {
         return studentService.saveStudent(student);
     }
 
@@ -25,5 +25,18 @@ public class StudentControllerImpl implements IStudentController {
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
+
+    @GetMapping(path = "/list/{id}")
+    @Override
+    public Student getStudentById(@PathVariable(name = "id") Integer id) {
+        return studentService.getStudentById(id);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    @Override
+    public void deleteStudent(@PathVariable(name = "id") Integer id) {
+        studentService.deleteStudent(id);
+    }
+
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements IStudentService {
@@ -19,9 +20,35 @@ public class StudentServiceImpl implements IStudentService {
 
 
     }
+
     @Override
     public List<Student> getAllStudents() {
-        List<Student> studentList = studentRepository.findAll();
+        List<Student> studentList = studentRepository.findAll();//bütün bilgilerle öğrencileri getirir
         return studentList;//repository kısmına bağlanıp listeyi çektik
+    }
+
+    @Override
+    public Student getStudentById(Integer id) {//id ile öğrenci bulur
+
+        Optional<Student> optional = studentRepository.findById(id);
+        if (optional.isPresent()) {//eğerki veriyi bulursa bana bu şekilde dönsün diyoruz.
+            return optional.get();
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteStudent(Integer id) {
+
+        Student dbStudent = getStudentById(id);
+        if (dbStudent != null) {
+            studentRepository.delete(dbStudent);
+
+        }
+    }
+
+    @Override
+    public Student updateStudent(Integer id, Student updateStudent) {
+        return null;
     }
 }

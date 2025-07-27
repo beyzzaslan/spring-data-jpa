@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "student ")
+@Table(name = "student")
 @Data//getter ve setter birleşimi bir yapı
 @NoArgsConstructor
 @AllArgsConstructor
