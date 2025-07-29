@@ -1,9 +1,12 @@
 package com.beyzaslan.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "student")
@@ -20,7 +23,8 @@ public class Student
     private String firstName;
     @Column(name = "last_Name",nullable = false)
     private String lastName;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_Of_Date")
-    private String birthOfDate;
+    private Date birthOfDate;
 }
 
