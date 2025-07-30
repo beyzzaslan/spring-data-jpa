@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class DtoStudentIU {//insert update işlemlerinde kullanılır
     @NotEmpty(message = "FirsName alanı boş bırakılamaz...")
-    @NotNull(message = "FirstName alaı null olamaz...")
+    @NotNull(message = "FirstName alanı null olamaz...")
     @Min(3)//firstname kısmı minimum 3 karakterli olabilir
     @Max(10)
     private String firstName;
