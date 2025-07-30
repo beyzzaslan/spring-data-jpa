@@ -34,7 +34,7 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public List<DtoStudent> getAllStudents() {
         List<DtoStudent> dtoList = new ArrayList<>();
-        List<Student> studentList = studentRepository.findAll();//bütün bilgilerle öğrencileri getirir
+        List<Student> studentList = studentRepository.findAllStudent();//bütün bilgilerle öğrencileri getirir
         for (Student student : studentList) {
             DtoStudent dto = new DtoStudent();
             BeanUtils.copyProperties(student, dto);
@@ -47,7 +47,7 @@ public class StudentServiceImpl implements IStudentService {
     public DtoStudent getStudentById(Integer id) {//id ile öğrenci bulur
 
         DtoStudent dto = new DtoStudent();
-        Optional<Student> optional = studentRepository.findById(id);
+        Optional<Student> optional = studentRepository.findStudentById(id);
         if (optional.isPresent()) {//eğerki veriyi bulursa bana bu şekilde dönsün diyoruz.
             Student dbStudent = optional.get();
             BeanUtils.copyProperties(dbStudent, dto);
