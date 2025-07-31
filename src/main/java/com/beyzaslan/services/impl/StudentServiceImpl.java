@@ -1,7 +1,9 @@
 package com.beyzaslan.services.impl;
 
+import com.beyzaslan.dto.DtoCourse;
 import com.beyzaslan.dto.DtoStudent;
 import com.beyzaslan.dto.DtoStudentIU;
+import com.beyzaslan.entities.Course;
 import com.beyzaslan.entities.Student;
 import com.beyzaslan.repository.StudentRepository;
 import com.beyzaslan.services.IStudentService;
@@ -46,13 +48,24 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public DtoStudent getStudentById(Integer id) {//id ile öğrenci bulur
 
-        DtoStudent dto = new DtoStudent();
+        DtoStudent dtoStudent = new DtoStudent();
         Optional<Student> optional = studentRepository.findStudentById(id);
-        if (optional.isPresent()) {//eğerki veriyi bulursa bana bu şekilde dönsün diyoruz.
-            Student dbStudent = optional.get();
-            BeanUtils.copyProperties(dbStudent, dto);
+        if(optional.isEmpty()){
+            return  null;
         }
-        return dto;
+        Student dbStudent = optional.get();
+        BeanUtils.copyProperties(dbStudent, dtoStudent);
+
+        if(dbStudent.getCourses()!=null && !dbStudent.getCourses().isEmpty()){
+            for(Course course : dbStudent.getCourses()){
+                DtoCourse dtoCourse = new DtoCourse();
+                BeanUtils.copyProperties(course,dtoCourse);
+
+                dtoStudent.getCourses().add(dtoCourse);
+
+            }
+        }
+        return dtoStudent;
     }
 
     @Override
